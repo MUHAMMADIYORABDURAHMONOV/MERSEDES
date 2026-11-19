@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="uz" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple (O'zbekiston)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        appleDark: '#161617',
+                        appleGray: '#f5f5f7',
+                        appleText: '#1d1d1f',
+                        appleBlue: '#0066cc',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background-color: #ffffff;
+            color: #1d1d1f;
+            overflow-x: hidden;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+    </style>
+</head>
+<body class="bg-white text-appleText">
+
+    <!-- NAVIGATION BAR -->
+    <nav class="bg-[#161617]/90 backdrop-blur-md text-[#f5f5f7] fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-[1024px] mx-auto px-4 h-12 flex items-center justify-between text-xs font-light">
+            <a href="#" class="text-lg hover:text-white transition"><i class="fa-brands fa-apple"></i></a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#store" class="hover:text-white transition">Do'kon</a>
+                <a href="#mac" class="hover:text-white transition">Mac</a>
+                <a href="#ipad" class="hover:text-white transition">iPad</a>
+                <a href="#iphone" class="hover:text-white transition">iPhone</a>
+                <a href="#watch" class="hover:text-white transition">Watch</a>
+                <a href="#airpods" class="hover:text-white transition">AirPods</a>
+                <a href="#tv" class="hover:text-white transition">TV va Uy</a>
+                <a href="#entertainment" class="hover:text-white transition">Ko'ngilochar</a>
+                <a href="#accessories" class="hover:text-white transition">Aksessuarlar</a>
+                <a href="#support" class="hover:text-white transition">Qo'llab-quvvatlash</a>
+            </div>
+            <div class="flex items-center space-x-6">
+                <button onclick="toggleSearch()" class="hover:text-white transition text-sm"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <button onclick="toggleCart()" class="hover:text-white transition relative text-sm">
+                    <i class="fa-bag-shopping fa-solid"></i>
+                    <span id="cart-badge" class="absolute -top-2 -right-2 bg-appleBlue text-white rounded-full w-4 h-4 text-[10px] flex items-center justify-center font-bold hidden">0</span>
+                </button>
+                <button onclick="toggleMobileMenu()" class="md:hidden text-lg hover:text-white transition"><i class="fa-solid fa-bars" id="menu-icon"></i></button>
+            </div>
+        </div>
+
+        <!-- MOBILE MENU -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#161617] border-t border-neutral-800 px-6 py-6 space-y-4 text-sm font-normal">
+            <a href="#store" onclick="toggleMobileMenu()" class="block hover:text-white">Do'kon</a>
+            <a href="#mac" onclick="toggleMobileMenu()" class="block hover:text-white">Mac</a>
+            <a href="#ipad" onclick="toggleMobileMenu()" class="block hover:text-white">iPad</a>
+            <a href="#iphone" onclick="toggleMobileMenu()" class="block hover:text-white">iPhone</a>
+            <a href="#watch" onclick="toggleMobileMenu()" class="block hover:text-white">Watch</a>
+            <a href="#airpods" onclick="toggleMobileMenu()" class="block hover:text-white">AirPods</a>
+            <a href="#tv" onclick="toggleMobileMenu()" class="block hover:text-white">TV va Uy</a>
+            <a href="#entertainment" onclick="toggleMobileMenu()" class="block hover:text-white">Ko'ngilochar</a>
+            <a href="#accessories" onclick="toggleMobileMenu()" class="block hover:text-white">Aksessuarlar</a>
+            <a href="#support" onclick="toggleMobileMenu()" class="block hover:text-white">Qo'llab-quvvatlash</a>
+        </div>
+    </nav>
+
+    <!-- SEARCH OVERLAY -->
+    <div id="search-overlay" class="fixed inset-0 bg-black/80 backdrop-blur-lg z-50 hidden flex flex-col items-center pt-24 px-4 transition-all">
+        <div class="w-full max-w-xl relative">
+            <i class="fa-solid fa-magnifying-glass absolute left-4 top-4 text-neutral-400 text-lg"></i>
+            <input type="text" id="search-input" placeholder="apple.com da qidirish" class="w-full bg-neutral-900 text-white placeholder-neutral-500 rounded-xl pl-12 pr-12 py-3.5 text-lg outline-none border border-neutral-700 focus:border-appleBlue transition">
+            <button onclick="toggleSearch()" class="absolute right-4 top-4 text-neutral-400 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="w-full max-w-xl mt-6 text-neutral-400 text-sm">
+            <p class="font-semibold text-neutral-300 mb-3">Tezkor havolalar</p>
+            <div class="flex flex-wrap gap-2">
+                <span onclick="quickSearch('iPhone Duo')" class="bg-neutral-800 hover:bg-neutral-700 text-white px-3 py-1.5 rounded-lg cursor-pointer transition">iPhone Duo</span>
+                <span onclick="quickSearch('iPhone 17 Pro')" class="bg-neutral-800 hover:bg-neutral-700 text-white px-3 py-1.5 rounded-lg cursor-pointer transition">iPhone 17 Pro</span>
+                <span onclick="quickSearch('MacBook Pro')" class="bg-neutral-800 hover:bg-neutral-700 text-white px-3 py-1.5 rounded-lg cursor-pointer transition">MacBook Pro</span>
+                <span onclick="quickSearch('Apple Watch')" class="bg-neutral-800 hover:bg-neutral-700 text-white px-3 py-1.5 rounded-lg cursor-pointer transition">Apple Watch Ultra</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- CART SIDEBAR -->
+    <div id="cart-sidebar" class="fixed inset-y-0 right-0 w-full max-w-md bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col">
+        <div class="p-6 border-b flex items-center justify-between">
+            <h2 class="text-xl font-bold">Savatchangiz</h2>
+            <button onclick="toggleCart()" class="text-neutral-500 hover:text-black text-lg"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
+            <p class="text-neutral-500 text-center mt-10">Savatchangiz bo'sh</p>
+        </div>
+        <div class="p-6 border-t bg-neutral-50">
+            <div class="flex justify-between mb-4 text-lg font-bold">
+                <span>Jami:</span>
+                <span id="cart-total">$0</span>
+            </div>
+            <button onclick="openCheckoutModal()" class="w-full bg-appleBlue hover:bg-blue-700 text-white py-3 rounded-xl font-semibold transition shadow-lg shadow-blue-500/20">Rasmiylashtirish</button>
+        </div>
+    </div>
+    <div id="cart-backdrop" onclick="toggleCart()" class="fixed inset-0 bg-black/50 z-40 hidden"></div>
+
+    <!-- NEW SECTION: IPHONE DUO (Rasmga moslab qo'shildi) -->
+    <section id="iphone-duo" class="relative bg-white text-appleText pt-32 pb-16 overflow-hidden text-center border-b">
+        <div class="max-w-4xl mx-auto px-4 z-10 relative">
+            <h1 class="text-4xl md:text-6xl font-bold tracking-tight mb-2">iPhone Duo</h1>
+            <p class="text-xl md:text-2xl text-neutral-500 font-light mb-6">Hello, hello.</p>
+            <div class="flex justify-center items-center space-x-4 mb-12">
+                <a href="#store" class="bg-appleBlue hover:bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-medium transition shadow-md">Learn more</a>
+                <button onclick="openModal('iPhone Duo', '$1799', 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?q=80&w=800&auto=format&fit=crop')" class="border border-appleBlue text-appleBlue hover:bg-appleBlue hover:text-white px-6 py-2 rounded-full text-sm font-medium transition">Buy</button>
+            </div>
+        </div>
+        <div class="max-w-4xl mx-auto px-4">
+            <img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?q=80&w=1200&auto=format&fit=crop" alt="iPhone Duo" class="mx-auto rounded-3xl shadow-xl hover:scale-[1.01] transition duration-500 max-h-[450px] object-cover">
+        </div>
+    </section>
+
+    <!-- MAIN HERO SECTION: IPHONE 17 PRO -->
+    <header id="iphone" class="relative bg-[#000000] text-white pt-24 pb-16 overflow-hidden text-center">
+        <div class="max-w-4xl mx-auto px-4 z-10 relative">
+            <span class="text-orange-500 font-semibold tracking-wide uppercase text-sm mb-2 block">Yangi</span>
+            <h2 class="text-5xl md:text-7xl font-bold tracking-tight mb-3">iPhone 17 Pro</h2>
+            <p class="text-xl md:text-2xl text-neutral-400 font-light mb-6">Titanium kuchi. O'zgacha darajadagi suratga olish.</p>
+            <div class="flex justify-center space-x-6 mb-12">
+                <button onclick="openModal('iPhone 17 Pro', '$999', 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=1200&auto=format&fit=crop')" class="bg-appleBlue hover:bg-blue-600 text-white px-6 py-2.5 rounded-full font-medium transition shadow-lg shadow-blue-500/30">Sotib olish</button>
+                <a href="#store" class="text-appleBlue hover:underline flex items-center font-medium">Batafsil <i class="fa-solid fa-chevron-right ml-1 text-xs"></i></a>
+            </div>
+        </div>
+        <div class="max-w-5xl mx-auto px-4">
+            <img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=1400&auto=format&fit=crop" alt="iPhone 17 Pro" class="mx-auto rounded-3xl shadow-2xl hover:scale-[1.01] transition duration-500 max-h-[500px] object-cover">
+        </div>
+    </header>
+
+    <!-- SECOND HERO SECTION: MACBOOK PRO M4 -->
+    <section id="mac" class="relative bg-appleGray text-appleText py-20 overflow-hidden text-center border-t border-b">
+        <div class="max-w-4xl mx-auto px-4 z-10 relative">
+            <h2 class="text-4xl md:text-6xl font-bold tracking-tight mb-3">MacBook Pro</h2>
+            <p class="text-xl md:text-2xl text-neutral-600 font-light mb-6">M4 chip oilasi bilan har qachongidan ham tezkor va qudratli.</p>
+            <div class="flex justify-center space-x-6 mb-12">
+                <button onclick="openModal('MacBook Pro 16', '$2499', 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1200&auto=format&fit=crop')" class="bg-appleBlue hover:bg-blue-600 text-white px-6 py-2.5 rounded-full font-medium transition shadow-lg shadow-blue-500/20">Sotib olish</button>
+                <a href="#store" class="text-appleBlue hover:underline flex items-center font-medium">Batafsil <i class="fa-solid fa-chevron-right ml-1 text-xs"></i></a>
+            </div>
+        </div>
+        <div class="max-w-5xl mx-auto px-4">
+            <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1400&auto=format&fit=crop" alt="MacBook Pro" class="mx-auto rounded-3xl shadow-xl hover:scale-[1.01] transition duration-500 max-h-[450px] object-cover">
+        </div>
+    </section>
+
+    <!-- THIRD HERO SECTION: APPLE WATCH ULTRA -->
+    <section id="watch" class="relative bg-black text-white py-20 overflow-hidden text-center">
+        <div class="max-w-4xl mx-auto px-4 z-10 relative">
+            <div class="flex items-center justify-center space-x-2 text-orange-400 mb-2 font-semibold">
+                <i class="fa-solid fa-fire"></i> <span>ULTRA 2</span>
+            </div>
+            <h2 class="text-4xl md:text-6xl font-bold tracking-tight mb-3">Apple Watch Ultra</h2>
+            <p class="text-xl md:text-2xl text-neutral-400 font-light mb-6">Sarguzashtlar uchun yaratilgan eng ilg'or va mustahkam soat.</p>
+            <div class="flex justify-center space-x-6 mb-12">
+                <button onclick="openModal('Apple Watch Ultra 2', '$799', 'https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?q=80&w=1200&auto=format&fit=crop')" class="bg-appleBlue hover:bg-blue-600 text-white px-6 py-2.5 rounded-full font-medium transition">Sotib olish</button>
+                <a href="#store" class="text-appleBlue hover:underline flex items-center font-medium">Batafsil <i class="fa-solid fa-chevron-right ml-1 text-xs"></i></a>
+            </div>
+        </div>
+        <div class="max-w-5xl mx-auto px-4">
+            <img src="https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?q=80&w=1400&auto=format&fit=crop" alt="Apple Watch Ultra" class="mx-auto rounded-3xl shadow-2xl hover:scale-[1.01] transition duration-500 max-h-[450px] object-cover">
+        </div>
+    </section>
+
+    <!-- PRODUCT GRID SECTION -->
+    <section id="store" class="max-w-[1280px] mx-auto px-4 py-16">
+        <h2 class="text-3xl md:text-5xl font-bold text-center mb-12">Barcha mahsulotlar galereyasi</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Card 1 -->
+            <div id="ipad" class="bg-appleGray rounded-3xl p-8 flex flex-col justify-between hover:shadow-2xl transition duration-300 group">
+                <div>
+                    <span class="text-xs uppercase font-bold text-neutral-500 tracking-wider">Planshet</span>
+                    <h3 class="text-2xl font-bold mt-1 mb-2">iPad Pro M4</h3>
+                    <p class="text-neutral-600 text-sm mb-6">Ultra yupqa dizayn va OLED displey texnologiyasi.</p>
+                </div>
+                <div class="overflow-hidden rounded-2xl mb-6">
+                    <img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?q=80&w=800&auto=format&fit=crop" alt="iPad Pro" class="w-full h-64 object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-lg font-bold">$999 dan</span>
+                    <button onclick="openModal('iPad Pro M4', '$999', 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?q=80&w=800&auto=format&fit=crop')" class="bg-appleBlue text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-600 transition">Tanlash</button>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div id="airpods" class="bg-appleGray rounded-3xl p-8 flex flex-col justify-between hover:shadow-2xl transition duration-300 group">
+                <div>
+                    <span class="text-xs uppercase font-bold text-neutral-500 tracking-wider">Ovoz</span>
+                    <h3 class="text-2xl font-bold mt-1 mb-2">AirPods Pro 2</h3>
+                    <p class="text-neutral-600 text-sm mb-6">Faol shovqinni pasaytirish va boy fazoviy ovoz.</p>
+                </div>
+                <div class="overflow-hidden rounded-2xl mb-6">
+                    <img src="https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?q=80&w=800&auto=format&fit=crop" alt="AirPods Pro" class="w-full h-64 object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-lg font-bold">$249</span>
+                    <button onclick="openModal('AirPods Pro 2', '$249', 'https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?q=80&w=800&auto=format&fit=crop')" class="bg-appleBlue text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-600 transition">Tanlash</button>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div id="tv" class="bg-appleGray rounded-3xl p-8 flex flex-col justify-between hover:shadow-2xl transition duration-300 group">
+                <div>
+                    <span class="text-xs uppercase font-bold text-neutral-500 tracking-wider">TV va Uy</span>
+                    <h3 class="text-2xl font-bold mt-1 mb-2">iMac M3</h3>
+                    <p class="text-neutral-600 text-sm mb-6">Jonli 24 dyuymli 4.5K Retina ekran va yorqin ranglar.</p>
+                </div>
+                <div class="overflow-hidden rounded-2xl mb-6">
+                    <img src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?q=80&w=800&auto=format&fit=crop" alt="iMac" class="w-full h-64 object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-lg font-bold">$1299 dan</span>
+                    <button onclick="openModal('iMac M3', '$1299', 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?q=80&w=800&auto=format&fit=crop')" class="bg-appleBlue text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-600 transition">Tanlash</button>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div id="entertainment" class="bg-appleGray rounded-3xl p-8 flex flex-col justify-between hover:shadow-2xl transition duration-300 group">
+                <div>
+                    <span class="text-xs uppercase font-bold text-neutral-500 tracking-wider">Ko'ngilochar</span>
+                    <h3 class="text-2xl font-bold mt-1 mb-2">iPhone 16</h3>
+                    <p class="text-neutral-600 text-sm mb-6">Apple Intelligence uchun maxsus ishlangan qudrat.</p>
+                </div>
+                <div class="overflow-hidden rounded-2xl mb-6">
+                    <img src="https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?q=80&w=800&auto=format&fit=crop" alt="iPhone 16" class="w-full h-64 object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-lg font-bold">$799 dan</span>
+                    <button onclick="openModal('iPhone 16', '$799', 'https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?q=80&w=800&auto=format&fit=crop')" class="bg-appleBlue text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-600 transition">Tanlash</button>
+                </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div id="accessories" class="bg-appleGray rounded-3xl p-8 flex flex-col justify-between hover:shadow-2xl transition duration-300 group">
+                <div>
+                    <span class="text-xs uppercase font-bold text-neutral-500 tracking-wider">Aksessuarlar</span>
+                    <h3 class="text-2xl font-bold mt-1 mb-2">Mac Studio M2 Ultra</h3>
+                    <p class="text-neutral-600 text-sm mb-6">Professional studiyalar uchun mislsiz unumdorlik.</p>
+                </div>
+                <div class="overflow-hidden rounded-2xl mb-6">
+                    <img src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?q=80&w=800&auto=format&fit=crop" alt="Mac Studio" class="w-full h-64 object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-lg font-bold">$1999 dan</span>
+                    <button onclick="openModal('Mac Studio', '$1999', 'https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?q=80&w=800&auto=format&fit=crop')" class="bg-appleBlue text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-600 transition">Tanlash</button>
+                </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div id="support" class="bg-appleGray rounded-3xl p-8 flex flex-col justify-between hover:shadow-2xl transition duration-300 group">
+                <div>
+                    <span class="text-xs uppercase font-bold text-neutral-500 tracking-wider">Qo'llab-quvvatlash</span>
+                    <h3 class="text-2xl font-bold mt-1 mb-2">Apple Vision Pro</h3>
+                    <p class="text-neutral-600 text-sm mb-6">Fazoviy his-tuyg'ular va o'yin-kulgi olami.</p>
+                </div>
+                <div class="overflow-hidden rounded-2xl mb-6">
+                    <img src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=800&auto=format&fit=crop" alt="Vision Pro" class="w-full h-64 object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-lg font-bold">$3499 dan</span>
+                    <button onclick="openModal('Apple Vision Pro', '$3499', 'https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=800&auto=format&fit=crop')" class="bg-appleBlue text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-600 transition">Tanlash</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PRODUCT DETAIL MODAL -->
+    <div id="product-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-8 relative shadow-2xl">
+            <button onclick="closeModal()" class="absolute right-6 top-6 text-neutral-400 hover:text-black text-xl"><i class="fa-solid fa-xmark"></i></button>
+            <img id="modal-img" src="" alt="Product" class="w-full h-64 object-cover rounded-2xl mb-6 shadow-md">
+            <h3 id="modal-title" class="text-2xl font-bold mb-2"></h3>
+            <p id="modal-price" class="text-xl text-appleBlue font-semibold mb-6"></p>
+            <div class="space-y-3">
+                <button onclick="addToCartFromModal()" class="w-full bg-appleBlue hover:bg-blue-700 text-white py-3 rounded-xl font-semibold transition">Savatchaga qo'shish</button>
+                <button onclick="buyNowFromModal()" class="w-full bg-neutral-900 hover:bg-black text-white py-3 rounded-xl font-semibold transition">Hozir sotib olish</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHECKOUT / BUY NOW MODAL -->
+    <div id="checkout-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-8 relative shadow-2xl">
+            <button onclick="closeCheckoutModal()" class="absolute right-6 top-6 text-neutral-400 hover:text-black text-xl"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="text-2xl font-bold mb-6 text-center">Buyurtmani rasmiylashtirish</h3>
+            <form id="checkout-form" onsubmit="submitOrder(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-neutral-600 mb-1 uppercase">Ism va familiyangiz</label>
+                    <input type="text" id="buyer-name" required placeholder="Masalan: Alisher Navoiy" class="w-full bg-neutral-100 border border-neutral-300 rounded-xl px-4 py-3 text-sm outline-none focus:border-appleBlue transition">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-neutral-600 mb-1 uppercase">Telefon raqamingiz</label>
+                    <input type="tel" id="buyer-phone" required placeholder="+998 90 123 45 67" class="w-full bg-neutral-100 border border-neutral-300 rounded-xl px-4 py-3 text-sm outline-none focus:border-appleBlue transition">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-neutral-600 mb-1 uppercase">Yetkazib berish manzili</label>
+                    <textarea id="buyer-address" required rows="2" placeholder="Shahar, ko'cha, uy raqami" class="w-full bg-neutral-100 border border-neutral-300 rounded-xl px-4 py-3 text-sm outline-none focus:border-appleBlue transition resize-none"></textarea>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-neutral-600 mb-1 uppercase">To'lov turi</label>
+                    <select id="payment-type" class="w-full bg-neutral-100 border border-neutral-300 rounded-xl px-4 py-3 text-sm outline-none focus:border-appleBlue transition">
+                        <option value="CASH">Yetkazib berilganda naqd pulda</option>
+                        <option value="CARD">Plastik karta orqali (Click / Payme)</option>
+                        <option value="CREDIT">Muddatli to'lov (Nasiriya)</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full bg-appleBlue hover:bg-blue-700 text-white py-3.5 rounded-xl font-bold transition shadow-lg shadow-blue-500/20 mt-2">Buyurtmani tasdiqlash</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-6 right-6 bg-neutral-900 text-white px-6 py-3 rounded-xl shadow-2xl z-50 transform translate-y-20 opacity-0 transition-all duration-300 flex items-center space-x-3">
+        <i class="fa-solid fa-circle-check text-green-400 text-lg"></i>
+        <span id="toast-text" class="text-sm font-medium">Mahsulot savatchaga qo'shildi!</span>
+    </div>
+
+    <!-- OFFICIAL APPLE FOOTER -->
+    <footer class="bg-appleGray text-neutral-500 text-[11px] leading-relaxed py-8 border-t border-neutral-300">
+        <div class="max-w-[1024px] mx-auto px-4 space-y-4">
+            <p>
+                Apple Payments Services LLC, a subsidiary of Apple Inc., is a service provider of Goldman Sachs Bank USA for Apple Card and Savings accounts. Neither Apple Inc. nor Apple Payments Services LLC is a bank.
+            </p>
+            <p>
+                All communications from Apple and Goldman Sachs Bank USA about Apple Card (including transactional and marketing communications) and customer service support are available in English. Certain communications about Apple Card can be viewed in another language depending on your device language settings. If you reside in the U.S. Virgin Islands, American Samoa, Guam, Northern Mariana Islands, or U.S. Minor Outlying Islands, please call Goldman Sachs at 877-255-5923 with questions about Apple Card.
+            </p>
+            <p>
+                Learn more about how Apple Card applications are evaluated at <a href="#" class="text-appleBlue hover:underline">support.apple.com/kb/HT209218</a>.
+            </p>
+            <p>
+                A subscription is required for Apple Arcade, Apple Fitness+, Apple Music, and Apple TV.
+            </p>
+            <p class="pb-4 border-b border-neutral-300">
+                Features are subject to change. Some features, applications, and services may not be available in all regions or all languages.
+            </p>
+
+            <!-- 5-Column Navigation Footer -->
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-6 py-4 text-neutral-600">
+                <!-- Column 1 -->
+                <div class="space-y-4">
+                    <div>
+                        <h4 class="font-semibold text-neutral-800 mb-2">Shop and Learn</h4>
+                        <ul class="space-y-1.5">
+                            <li><a href="#" class="hover:text-black transition">Store</a></li>
+                            <li><a href="#" class="hover:text-black transition">Mac</a></li>
+                            <li><a href="#" class="hover:text-black transition">iPad</a></li>
+                            <li><a href="#" class="hover:text-black transition">iPhone</a></li>
+                            <li><a href="#" class="hover:text-black transition">Watch</a></li>
+                            <li><a href="#" class="hover:text-black transition">Vision</a></li>
+                            <li><a href="#" class="hover:text-black transition">AirPods</a></li>
+                            <li><a href="#" class="hover:text-black transition">Home</a></li>
+                            <li><a href="#" class="hover:text-black transition">AirTag</a></li>
+                            <li><a href="#" class="hover:text-black transition">Accessories</a></li>
+                            <li><a href="#" class="hover:text-black transition">Gift Cards</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-neutral-800 mb-2">Apple Wallet</h4>
+                        <ul class="space-y-1.5">
+                            <li><a href="#" class="hover:text-black transition">Wallet</a></li>
+                            <li><a href="#" class="hover:text-black transition">Apple Card</a></li>
+                            <li><a href="#" class="hover:text-black transition">Apple Pay</a></li>
+                            <li><a href="#" class="hover:text-black transition">Apple Cash</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Column 2 -->
+                <div class="space-y-4">
+                    <div>
+                        <h4 class="font-semibold text-neutral-800 mb-2">Account</h4>
+                        <ul class="space-y-1.5">
+                            <li><a href="#" class="hover:text-black transition">Manage Your Apple Account</a></li>
+                            <li><a href="#" class="hover:text-black transition">Apple Store Account</a></li>
+                            <li><a href="#" class="hover:text-black transition">iCloud.com</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-neutral-800 mb-2">Entertainment</h4>
+                        <ul class="space-y-1.5">
+                            <li><a href="#" class="hover:text-black transition">Apple One</a></li>
+                            <li><a href="#" class="hover:text-black transition">Apple TV</a></li>
+                            <li><a href="#" class="hover:text-black transition">Apple Music</a></li>
+                            <li><a href="#" class="hover:text-black transition">Apple Arcade</a></li>
+                            <li><a href="#" class="hover:text-black transition">Apple Fitness+</a></li>
+                            <li><a href="#" class="hover:text-black transition">Apple News+</a></li>
+                            <li><a href="#" class="hover:text-black transition">Apple Podcasts</a></li>
+                            <li><a href="#" class="hover:text-black transition">Apple Books</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Column 3 -->
+                <div class="space-y-4">
+                    <div>
+                        <h4 class="font-semibold text-neutral-800 mb-2">Apple Store</h4>
+                        <ul class="space-y-1.5">
+                            <li><a href="#" class="hover:text-black transition">Find a Store</a></li>
+                            <li><a href="#" class="hover:text-black transition">Genius Bar</a></li>
+                            <li><a href="#" class="hover:text-black transition">Today at Apple</a></li>
+                            <li><a href="#" class="hover:text-black transition">Group Reservations</a></li>
+                            <li><a href="#" class="hover:text-black transition">Apple Camp</a></li>
+                            <li><a href="#" class="hover:text-black transition">Apple Store App</a></li>
+                            <li><a href="#" class="hover:text-black transition">Certified Refurbished</a></li>
+                            <li><a href="#" class="hover:text-black transition">Apple Upgrade</a></li>
+                            <li><a href="#" class="hover:text-black transition">Apple Trade In</a></li>
+                            <li><a href="#" class="hover:text-black transition">Financing</a></li>
+                            <li><a href="#" class="hover:text-black transition">Order Status</a></li>
+                            <li><a href="#" class="hover:text-black transition">Shopping Help</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Column 4 -->
+                <div class="space-y-4">
+                    <div>
+                        <h4 class="font-semibold text-neutral-800 mb-2">For Business</h4>
+                        <ul class="space-y-1.5">
+                            <li><a href="#" class="hover:text-black transition">Apple and Business</a></li>
+                            <li><a href="#" class="hover:text-black transition">Shop for Business</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-neutral-800 mb-2">For Education</h4>
+                        <ul class="space-y-1.5">
+                            <li><a href="#" class="hover:text-black transition">Apple and Education</a></li>
+                            <li><a href="#" class="hover:text-black transition">Shop for K-12</a></li>
+                            <li><a href="#" class="hover:text-black transition">Shop for College</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-neutral-800 mb-2">For Healthcare</h4>
+                        <ul class="space-y-1.5">
+                            <li><a href="#" class="hover:text-black transition">Apple in Healthcare</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-neutral-800 mb-2">For Government</h4>
+                        <ul class="space-y-1.5">
+                            <li><a href="#" class="hover:text-black transition">Shop for Government</a></li>
+                            <li><a href="#" class="hover:text-black transition">Shop for Veterans</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Column 5 -->
+                <div class="space-y-4">
+                    <div>
+                        <h4 class="font-semibold text-neutral-800 mb-2">Apple Values</h4>
+                        <ul class="space-y-1.5">
+                            <li><a href="#" class="hover:text-black transition">Accessibility</a></li>
+                            <li><a href="#" class="hover:text-black transition">Education</a></li>
+                            <li><a href="#" class="hover:text-black transition">Environment</a></li>
+                            <li><a href="#" class="hover:text-black transition">Privacy</a></li>
+                            <li><a href="#" class="hover:text-black transition">Supply Chain</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-neutral-800 mb-2">About Apple</h4>
+                        <ul class="space-y-1.5">
+                            <li><a href="#" class="hover:text-black transition">Newsroom</a></li>
+                            <li><a href="#" class="hover:text-black transition">Apple Leadership</a></li>
+                            <li><a href="#" class="hover:text-black transition">Career Opportunities</a></li>
+                            <li><a href="#" class="hover:text-black transition">Investors</a></li>
+                            <li><a href="#" class="hover:text-black transition">Ethics & Compliance</a></li>
+                            <li><a href="#" class="hover:text-black transition">Events</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Copyright & Links -->
+            <div class="pt-4 border-t border-neutral-300 flex flex-col md:flex-row justify-between items-center text-[11px]">
+                <p>Copyright &copy; 2026 Apple Inc. All rights reserved.</p>
+                <div class="flex flex-wrap gap-4 mt-2 md:mt-0">
+                    <a href="#" class="hover:text-black transition">Privacy Policy</a>
+                    <a href="#" class="hover:text-black transition">Terms of Use</a>
+                    <a href="#" class="hover:text-black transition">Sales Policy</a>
+                    <a href="#" class="hover:text-black transition">Legal</a>
+                    <a href="#" class="hover:text-black transition">Site Map</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        let cart = [];
+        let currentProduct = null;
+        let isDirectBuy = false;
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            menu.classList.toggle('hidden');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-xmark');
+        }
+
+        function toggleSearch() {
+            const overlay = document.getElementById('search-overlay');
+            overlay.classList.toggle('hidden');
+            if(!overlay.classList.contains('hidden')) {
+                document.getElementById('search-input').focus();
+            }
+        }
+
+        function quickSearch(query) {
+            document.getElementById('search-input').value = query;
+            toggleSearch();
+            showToast(`"${query}" bo'yicha qidiruv bajarildi`);
+        }
+
+        function toggleCart() {
+            const sidebar = document.getElementById('cart-sidebar');
+            const backdrop = document.getElementById('cart-backdrop');
+            sidebar.classList.toggle('translate-x-full');
+            backdrop.classList.toggle('hidden');
+        }
+
+        function openModal(title, price, img) {
+            currentProduct = { title, price, img };
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-price').innerText = price;
+            document.getElementById('modal-img').src = img;
+            document.getElementById('product-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('product-modal').classList.add('hidden');
+        }
+
+        function addToCartFromModal() {
+            if (!currentProduct) return;
+            cart.push(currentProduct);
+            updateCartUI();
+            closeModal();
+            showToast(`${currentProduct.title} savatchaga qo'shildi!`);
+        }
+
+        function buyNowFromModal() {
+            if (!currentProduct) return;
+            isDirectBuy = true;
+            closeModal();
+            document.getElementById('checkout-modal').classList.remove('hidden');
+        }
+
+        function openCheckoutModal() {
+            if(cart.length === 0) {
+                alert('Savatchangiz bo\'sh!');
+                return;
+            }
+            isDirectBuy = false;
+            toggleCart();
+            document.getElementById('checkout-modal').classList.remove('hidden');
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkout-modal').classList.add('hidden');
+        }
+
+        function submitOrder(event) {
+            event.preventDefault();
+            const name = document.getElementById('buyer-name').value;
+            const phone = document.getElementById('buyer-phone').value;
+            
+            closeCheckoutModal();
+            document.getElementById('checkout-form').reset();
+            
+            if (!isDirectBuy) {
+                cart = [];
+                updateCartUI();
+            }
+            
+            alert(`Tabriklaymiz, ${name}! Buyurtmangiz muvaffaqiyatli qabul qilindi. Tez orada ${phone} raqamingizga operatorimiz bog'lanadi.`);
+        }
+
+        function updateCartUI() {
+            const badge = document.getElementById('cart-badge');
+            const itemsContainer = document.getElementById('cart-items');
+            const totalContainer = document.getElementById('cart-total');
+
+            if (cart.length > 0) {
+                badge.classList.remove('hidden');
+                badge.innerText = cart.length;
+            } else {
+                badge.classList.add('hidden');
+            }
+
+            if (cart.length === 0) {
+                itemsContainer.innerHTML = '<p class="text-neutral-500 text-center mt-10">Savatchangiz bo\'sh</p>';
+                totalContainer.innerText = '$0';
+                return;
+            }
+
+            let html = '';
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                let numericPrice = parseFloat(item.price.replace('$', '').replace(' dan', ''));
+                total += numericPrice;
+                html += `
+                    <div class="flex items-center justify-between border-b pb-4">
+                        <img src="${item.img}" class="w-16 h-16 object-cover rounded-xl">
+                        <div class="flex-1 ml-4">
+                            <h4 class="font-bold text-sm">${item.title}</h4>
+                            <p class="text-appleBlue text-sm">${item.price}</p>
+                        </div>
+                        <button onclick="removeFromCart(${index})" class="text-neutral-400 hover:text-red-500"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                `;
+            });
+
+            itemsContainer.innerHTML = html;
+            totalContainer.innerText = `$${total.toLocaleString()}`;
+        }
+
+        function removeFromCart(index) {
+            let removed = cart.splice(index, 1);
+            updateCartUI();
+            showToast(`${removed[0].title} olib tashlandi`);
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-text').innerText = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
